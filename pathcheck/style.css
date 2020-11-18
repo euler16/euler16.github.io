@@ -53,4 +53,7 @@ nav {
   padding: 10px;
   width: 70%;
 }
-
+#line {
+    width: 100px; /* need to change this */
+    height: 100px; /* need to change this */
+}
