@@ -4,6 +4,7 @@ _site
 .ruby-version
 .bundle/
 vendor/bundle/
+.sass-cache/
 
 # Numerous always-ignore extensions
 *.diff
