@@ -1,0 +1,227 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  Site data. Most of what you will want to edit lives here.
+#  Empty values ("" or []) are simply not rendered — nothing fake is shown.
+# ─────────────────────────────────────────────────────────────────────────────
+
+url: "https://mehedieh.github.io"   # no trailing slash
+lang: en
+title: "Mehedi Ackerman"
+tagline: "Security, software and physics"
+description: >-
+  Mehedi Ackerman is a physics undergraduate at Gopalganj Science and Technology
+  University (GSTU), Bangladesh, and a cybersecurity analyst who builds
+  privacy-respecting software.
+google_site_verification: "vwYCfky0cvDbXOZf8paQPxN_K8ZbjiEkcynzIjf92jY"
+
+author:
+  name: "Mehedi Ackerman"
+  # Names used elsewhere (GitHub profile, older posts). Used only in structured data.
+  also_known_as: ["Mehedi Hasan Shanto", "Mehedi Hasan"]
+  location: "Bangladesh"
+  photo: "/img/me.jpg"
+  photo_alt: "Portrait of Mehedi Ackerman wearing glasses, against a dusk sky"
+
+links:
+  github: "https://github.com/mehedieh"
+  linkedin: "https://www.linkedin.com/in/mehedihasan1999"
+  email: "bsmrstu.mehedi@gmail.com"
+  twitter: "https://twitter.com/mehedx"
+  # Add a PDF to static/files/ and set e.g. "/files/cv.pdf" to show a download button.
+  cv: "/files/cv.pdf"
+
+education:
+  - institution: "Gopalganj Science and Technology University (GSTU)"
+    note: "formerly Bangabandhu Sheikh Mujibur Rahman Science & Technology University (BSMRSTU)"
+    degree: "BSc in Physics (in progress)"
+    location: "Gopalganj, Bangladesh"
+    years: "April 2022 – present"
+  - institution: "Ibn Taimiya School & College"
+    note: ""
+    degree: "Higher Secondary Certificate (HSC), Science"
+    location: "Cumilla, Bangladesh"
+    years: "2017 – 2019"
+
+# From CV_V1 (September 2025).
+experience:
+  - role: "Cyber Security Analyst"
+    org: "Firewall BD"
+    location: "Dhaka, Bangladesh"
+    since: "June 2021"
+    points:
+      - "Advise individuals and businesses on cybercrime, helping them contain threats and tighten their security practices."
+      - "Carry out digital forensic investigations that have helped identify the people behind cybercrimes."
+      - "Help victims prepare and file legal complaints so cyber-related cases get a fast, effective response."
+      - "Work with law enforcement agencies to trace and prosecute cybercriminals."
+
+security_education:
+  - name: "Data Shield"
+    org: "ActionAid project"
+    summary: "Helped university students understand data safety and cybersecurity."
+    url: "https://facebook.com/datashield.dftp"
+
+activities:
+  - title: "Regional winner, Bangladesh Physics Olympiad"
+    org: "BdPhO 2019, Cumilla"
+    date: "March 2019"
+    detail: "Won the regional round and qualified for the national olympiad at SUST."
+  - title: "Academic team member, Bangladesh Mathematical Olympiad"
+    org: "BdMO"
+    date: "January 2020 – present"
+    detail: "Designed questions and evaluated answer scripts for the 2020 regional olympiad."
+  - title: "Organizing lead, Dead Poets Society"
+    org: "Film society, GSTU"
+    date: "December 2022 – present"
+    detail: "Organises screenings, discussions and seminars, leads photography and design, and organised the society's February 2024 film festival."
+
+elsewhere:
+  - name: "Diary of an Oxygen Thief"
+    summary: "My blog on films, art and politics."
+    url: "https://mehedie.wordpress.com/"
+
+certifications:
+  - name: "Certified Cybersecurity Educator Professional (CCEP)"
+    issuer: "Red Team Leaders"
+    date: "October 12, 2026"
+    credential_id: "d46c0b1226997657"
+    verify_url: "https://courses.redteamleaders.com/exam-completion/d46c0b1226997657"
+
+# Shown on Home and About. Only skills evidenced by public repositories are listed;
+# add more as you see fit.
+skills:
+  - group: "Languages"
+    items: ["Kotlin", "JavaScript", "Python", "C++", "HTML & CSS"]
+  - group: "Android"
+    items: ["Jetpack Compose", "Material 3", "Room", "DataStore", "Hilt", "Coroutines & StateFlow", "WorkManager", "CameraX"]
+  - group: "Security engineering"
+    items: ["SQLCipher", "Android Keystore", "Biometric auth", "Privacy-by-design", "Least-privilege permissions"]
+  - group: "Systems & tooling"
+    items: ["Linux", "Windows", "Git & GitHub", "Chrome Extensions (MV3)", "Static sites"]
+  - group: "Creative"
+    items: ["Photography", "Graphic design", "Photoshop"]
+
+writing_categories:
+  - { slug: cybersecurity, name: "Cybersecurity" }
+  - { slug: software, name: "Software Engineering" }
+  - { slug: physics, name: "Physics" }
+  - { slug: notes, name: "Academic Notes" }
+  - { slug: technology, name: "Technology" }
+  - { slug: reflections, name: "Personal Reflections" }
+
+# ── Projects ────────────────────────────────────────────────────────────────
+# `detail: true` means content/projects/<slug>.md exists and gets its own page.
+projects:
+  - slug: wordsmrt
+    name: "WordSmrt"
+    featured: true
+    detail: true
+    kind: "Android app"
+    category: android
+    summary: "A privacy-first English vocabulary app that runs entirely offline — flashcards, Bangla meanings, quizzes and spaced repetition, with no permissions and no accounts."
+    stack: ["Kotlin", "Jetpack Compose", "Material 3", "Room", "DataStore", "StateFlow"]
+    repo: "https://github.com/mehedieh/WordSmrt"
+    demo: ""
+    hue: 214
+    motif: curve
+  - slug: smartledger
+    name: "SmartLedger"
+    featured: true
+    detail: true
+    kind: "Android app"
+    category: android
+    summary: "Offline-first point-of-sale and business management for small retailers: inventory, invoicing, dues, reports and thermal printing, with an encrypted local database."
+    stack: ["Kotlin", "Jetpack Compose", "Hilt", "Room", "SQLCipher", "WorkManager"]
+    repo: "https://github.com/mehedieh/SmartLedger"
+    demo: ""
+    license: "MIT"
+    hue: 162
+    motif: ledger
+  - slug: bd-railway-helper
+    name: "BD Railway Helper"
+    featured: true
+    detail: true
+    kind: "Chrome extension"
+    category: web
+    summary: "A Manifest V3 extension that speeds up booking your own tickets on Bangladesh Railway's e-ticket site — and deliberately stops short of login, CAPTCHA, OTP and payment."
+    stack: ["JavaScript", "Chrome Extensions", "Manifest V3"]
+    repo: "https://github.com/mehedieh/railway-booking-helper"
+    demo: ""
+    license: "MIT"
+    hue: 28
+    motif: track
+  - slug: gstu-physics-smart-campus
+    name: "GSTU Physics Smart Campus"
+    featured: false
+    detail: false
+    kind: "Campus software"
+    category: web
+    # ← Add a one-line description, stack and repository link.
+    summary: ""
+    stack: []
+    repo: ""
+    demo: ""
+    hue: 262
+    motif: grid
+  - slug: root-finder
+    name: "Root Finder"
+    featured: false
+    detail: false
+    kind: "Numerical methods"
+    category: science
+    summary: "A small browser tool written for a numerical-methods course (MAT360)."
+    stack: ["JavaScript", "HTML", "CSS"]
+    repo: "https://github.com/mehedieh/root-finder"
+    demo: "https://r00tf.netlify.app/"
+    hue: 200
+    motif: curve
+  - slug: lapostat
+    name: "Lapostat"
+    featured: false
+    detail: false
+    kind: "Personal tool"
+    category: tools
+    summary: "A Python utility built for personal use."
+    stack: ["Python"]
+    repo: "https://github.com/mehedieh/Lapostat"
+    demo: ""
+    hue: 48
+    motif: grid
+  - slug: double-pendulum
+    name: "Double Pendulum"
+    featured: false
+    detail: false
+    kind: "Physics simulation"
+    category: science
+    summary: "An interactive chaotic double pendulum integrated from the Lagrangian equations of motion — the animation at the top of this site's home page."
+    stack: ["JavaScript", "Canvas", "RK4"]
+    repo: ""
+    demo: "/physics/"
+    hue: 214
+    motif: curve
+
+project_filters:
+  - { slug: all, name: "All" }
+  - { slug: android, name: "Android" }
+  - { slug: web, name: "Web & extensions" }
+  - { slug: science, name: "Scientific computing" }
+  - { slug: tools, name: "Tools" }
+
+# ── Physics ─────────────────────────────────────────────────────────────────
+physics:
+  academic_interests:
+    - { name: "Classical Mechanics", note: "Lagrangian and Hamiltonian formulations" }
+    - { name: "Electromagnetism", note: "Maxwell's equations, circuits beyond the lumped model" }
+    - { name: "Quantum Mechanics", note: "" }
+    - { name: "Theoretical Physics", note: "" }
+    - { name: "Condensed Matter Physics", note: "" }
+    - { name: "Semiconductor Physics", note: "" }
+    - { name: "Computational Physics", note: "Numerical integration, simulation" }
+    - { name: "Materials Science", note: "" }
+  # Interests — not completed research. Change `status` when work begins
+  # (allowed: interest | exploring | ongoing | published).
+  research_interests:
+    - { name: "Perovskite solar cells", status: interest }
+    - { name: "Semiconductor materials", status: interest }
+    - { name: "Solar energy conversion", status: interest }
+    - { name: "Scientific computing", status: interest }
+    - { name: "Machine learning in materials science", status: interest }
+  publications: []   # e.g. - { title: "...", venue: "...", year: 2026, url: "..." }

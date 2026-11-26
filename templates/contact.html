@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <h1>Get in touch.</h1>
+    <p class="lede">For security or software opportunities, research collaboration, or a question about something I've written, email is the most reliable way to reach me.</p>
+  </div>
+</header>
+<section class="section" style="padding-top:0">
+  <div class="wrap" style="max-width:calc(820px + var(--gutter) * 2)">
+    <ul class="contact-list">
+      {% if site.links.email %}
+      <li><a href="mailto:{{ site.links.email }}">{{ m.icon("mail") }}<span><span class="contact-list__label">Email</span><span class="contact-list__value">{{ site.links.email }}</span></span>{{ m.icon("arrow-up-right", "arrow") }}</a></li>
+      {% endif %}
+      {% if site.links.github %}
+      <li><a href="{{ site.links.github }}" rel="me noopener">{{ m.icon("github") }}<span><span class="contact-list__label">GitHub</span><span class="contact-list__value">{{ site.links.github | replace("https://", "") }}</span></span>{{ m.icon("arrow-up-right", "arrow") }}</a></li>
+      {% endif %}
+      {% if site.links.linkedin %}
+      <li><a href="{{ site.links.linkedin }}" rel="me noopener">{{ m.icon("linkedin") }}<span><span class="contact-list__label">LinkedIn</span><span class="contact-list__value">{{ site.links.linkedin | replace("https://www.", "") }}</span></span>{{ m.icon("arrow-up-right", "arrow") }}</a></li>
+      {% endif %}
+      {% if site.links.twitter %}
+      <li><a href="{{ site.links.twitter }}" rel="me noopener">{{ m.icon("x") }}<span><span class="contact-list__label">X (Twitter)</span><span class="contact-list__value">@{{ site.links.twitter.rstrip('/').split('/')[-1] }}</span></span>{{ m.icon("arrow-up-right", "arrow") }}</a></li>
+      {% endif %}
+    </ul>
+    <p class="muted" style="margin-top:2rem">Based in {{ site.author.location }} (UTC+6).</p>
+  </div>
+</section>
+{% endblock %}

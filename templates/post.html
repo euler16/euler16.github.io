@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">
+{{ {"@context": "https://schema.org", "@type": "BlogPosting", "headline": post.title, "description": post.description,
+    "datePublished": post.date.isoformat(), "dateModified": (post.updated or post.date) | string,
+    "mainEntityOfPage": site.url ~ post.url, "url": site.url ~ post.url, "inLanguage": "en",
+    "articleSection": cat_names[post.category], "wordCount": post.text.split() | length,
+    "image": site.url ~ "/img/brand/og.png",
+    "author": {"@type": "Person", "@id": site.url ~ "/#person", "name": site.author.name, "url": site.url ~ "/about/"}} | tojson }}
+</script>
+{% endblock %}
+{% block progress %}<div class="progress" aria-hidden="true"><span></span></div>{% endblock %}
+{% block content %}
+<article data-article>
+  <header class="article-head">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="/writing/">Writing</a><span aria-hidden="true">/</span><a href="/writing/?category={{ post.category }}">{{ cat_names[post.category] }}</a></nav>
+      <h1>{{ post.title }}</h1>
+      {% if post.description %}<p class="lede">{{ post.description }}</p>{% endif %}
+      <ul class="meta-list meta">
+        <li><time datetime="{{ post.date.isoformat() }}">{{ post.date | date_long }}</time></li>
+        <li>{{ post.minutes }} min read</li>
+        <li>By {{ site.author.name }}</li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="wrap article-layout">
+    {% if post.toc | length >= 3 %}
+    <nav class="toc" aria-label="Table of contents">
+      <details open>
+        <summary><h2 style="display:inline">On this page</h2></summary>
+        <ol style="margin-top:.75rem">
+          {% for t in post.toc %}<li class="lvl-{{ t.level }}"><a href="#{{ t.id }}">{{ t.name }}</a></li>{% endfor %}
+        </ol>
+      </details>
+    </nav>
+    {% endif %}
+    <div>
+      <div class="prose">{{ post.html | safe }}</div>
+      <footer class="article-foot">
+        <span class="meta">Filed under <a href="/writing/?category={{ post.category }}">{{ cat_names[post.category] }}</a></span>
+        <button class="btn btn--ghost btn--small" type="button" data-share data-title="{{ post.title }}" data-url="{{ site.url ~ post.url }}">{{ m.icon("share") }}<span>Share</span></button>
+      </footer>
+    </div>
+  </div>
+</article>
+
+<section class="section" aria-labelledby="related">
+  <div class="wrap">
+    <h2 id="related" style="font-size:var(--step-2);margin-bottom:1.25rem">Related reading</h2>
+    <ul class="post-list">{% for p in related %}{{ m.post_row(p) }}{% endfor %}</ul>
+    {% if newer or older %}
+    <nav class="pager" aria-label="Previous and next article" style="margin-top:2.5rem">
+      {% if older %}<a href="{{ older.url }}"><span class="meta">Previous</span>{{ older.title }}</a>{% else %}<span></span>{% endif %}
+      {% if newer %}<a class="next" href="{{ newer.url }}"><span class="meta">Next</span>{{ newer.title }}</a>{% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

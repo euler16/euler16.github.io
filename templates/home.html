@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type": "WebSite", "@id": site.url ~ "/#website", "url": site.url ~ "/", "name": site.title, "description": site.description, "inLanguage": "en"},
+    {"@type": "Person", "@id": site.url ~ "/#person", "name": site.author.name, "alternateName": site.author.also_known_as,
+     "url": site.url ~ "/", "image": site.url ~ "/img/me.jpg",
+     "jobTitle": "Cyber Security Analyst",
+     "affiliation": {"@type": "CollegeOrUniversity", "name": "Gopalganj Science and Technology University"},
+     "knowsAbout": ["Cybersecurity", "Information security", "Android development", "Physics", "Computational physics"],
+     "sameAs": [site.links.github, site.links.linkedin, site.links.twitter] | select | list}
+  ]
+} | tojson }}
+</script>
+{% endblock %}
+{% block content %}
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div>
+      <p class="hero__name" data-reveal="1">
+        <picture>
+          <source srcset="/img/me-320.webp" type="image/webp">
+          <img src="/img/me-320.jpg" alt="" width="32" height="32">
+        </picture>
+        {{ site.author.name }}
+      </p>
+      <h1 id="hero-title" data-reveal="2">
+        <span class="line">Securing systems.</span>
+        <span class="line">Building software.</span>
+        <span class="line line--quiet">Exploring the universe.</span>
+      </h1>
+      <p class="lede" data-reveal="3">I'm {{ site.author.name }} — a physics undergraduate at GSTU, Bangladesh, a cybersecurity analyst since 2021, and a software developer. I build privacy-respecting Android apps, write about physics, and care about how systems fail.</p>
+      <div class="btn-row" data-reveal="4">
+        <a class="btn btn--primary" href="/projects/">Explore my work</a>
+        <a class="btn btn--ghost" href="/about/">About me</a>
+      </div>
+    </div>
+    <figure class="hero__visual" id="pendulum" data-pendulum-scope data-reveal="3" style="margin:0">
+      <canvas data-pendulum role="img" aria-label="Animated double pendulum tracing a chaotic path. Drag either bob to move it."></canvas>
+      <figcaption class="hero__caption">Chaotic double pendulum, solved live. Drag a bob, or <button type="button" data-pendulum-reset>reset</button>.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="areas-title">
+  <div class="wrap">
+    <h2 id="areas-title" class="visually-hidden">Areas of work</h2>
+    <div class="disciplines" data-observe>
+      <a class="discipline" href="/security/">
+        {{ m.icon("shield", "discipline__icon") }}
+        <h3>Security</h3>
+        <p>Information security, security education and awareness, and building software that keeps users' data on their side.</p>
+        <span class="text-link">Cybersecurity</span>
+      </a>
+      <a class="discipline" href="/projects/">
+        {{ m.icon("code", "discipline__icon") }}
+        <h3>Software</h3>
+        <p>Offline-first Android apps in Kotlin and Compose, browser extensions, and small tools for real problems.</p>
+        <span class="text-link">Projects</span>
+      </a>
+      <a class="discipline" href="/physics/">
+        {{ m.icon("atom", "discipline__icon") }}
+        <h3>Physics</h3>
+        <p>Classical mechanics, electromagnetism and computational physics, with a growing interest in semiconductors and solar materials.</p>
+        <span class="text-link">Physics</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="work-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2 id="work-title">Selected work</h2>
+        <p>Apps and tools I have designed and built end to end.</p>
+      </div>
+      <a class="text-link" href="/projects/">All projects</a>
+    </div>
+    <div class="project-stack">
+      {% for p in featured %}
+      <div data-observe>{{ m.project_feature(p, flip=loop.index is even) }}</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="skills-title">
+  <div class="wrap split">
+    <div class="split__head">
+      <h2 id="skills-title">Technical skills</h2>
+      <p>Tools I have shipped real code with, as shown in my public repositories.</p>
+    </div>
+    <div class="skills" data-observe>
+      {% for g in site.skills if g.group != "Creative" %}
+      <div>
+        <h3>{{ g.group }}</h3>
+        <ul class="tags">{% for s in g["items"] %}<li class="pill">{{ s }}</li>{% endfor %}</ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="academic-title">
+  <div class="wrap split">
+    <div class="split__head">
+      <h2 id="academic-title">Academic interests</h2>
+      <p>Physics at Gopalganj Science and Technology University, and where I would like to take it.</p>
+      <a class="text-link" href="/physics/">Physics &amp; research</a>
+    </div>
+    <ul class="interest-list" data-observe>
+      {% for a in site.physics.academic_interests[:5] %}
+      <li><span>{{ a.name }}</span>{% if a.note %}<span class="note">{{ a.note }}</span>{% endif %}</li>
+      {% endfor %}
+      {% for r in site.physics.research_interests[:2] %}
+      <li><span>{{ r.name }}</span><span class="status status--{{ r.status }}">research {{ r.status }}</span></li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="writing-title">
+  <div class="wrap split">
+    <div class="split__head">
+      <h2 id="writing-title">Recent writing</h2>
+      <p>Notes, problem solutions and essays.</p>
+      <a class="text-link" href="/writing/">All writing</a>
+    </div>
+    <ul class="post-list" data-observe>
+      {% for p in recent %}{{ m.post_row(p) }}{% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="contact-title">
+  <div class="wrap cta-band">
+    <h2 id="contact-title">Open to security, software and research collaborations.</h2>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/contact/">Get in touch</a>
+      <a class="btn btn--ghost" href="{{ site.links.github }}" rel="noopener">{{ m.icon("github") }}GitHub</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

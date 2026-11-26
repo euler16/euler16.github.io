@@ -1,0 +1,58 @@
+{% import "macros.html" as m %}
+{% set page_title = (title ~ " — " ~ site.title) if title else (site.title ~ " — " ~ site.tagline) %}
+{% set canonical_url = canonical | absurl %}
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{{ page_title }}</title>
+  <script>(function(){var d=document.documentElement,t;try{t=localStorage.getItem("theme")}catch(e){}if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.setAttribute("data-theme",t);d.classList.add("js")})()</script>
+  <meta name="description" content="{{ description }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% if noindex %}<meta name="robots" content="noindex">{% endif %}
+  <meta name="author" content="{{ site.author.name }}">
+  <meta name="theme-color" content="#fbfbf9">
+  <meta name="color-scheme" content="light dark">
+  {% if site.google_site_verification %}<meta name="google-site-verification" content="{{ site.google_site_verification }}">{% endif %}
+
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="{{ og_type or 'website' }}">
+  <meta property="og:title" content="{{ title or site.title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ '/img/brand/og.png' | absurl }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{ site.title }}: {{ site.tagline }}">
+  <meta property="og:locale" content="en_US">
+  {% if post %}
+  <meta property="article:published_time" content="{{ post.date.isoformat() }}">
+  <meta property="article:section" content="{{ cat_names[post.category] }}">
+  {% endif %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ title or site.title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ '/img/brand/og.png' | absurl }}">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/img/brand/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/brand/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }} — Writing" href="/feed.xml">
+  <link rel="stylesheet" href="/css/main.css?v={{ css_version }}">
+  {% if post or project %}<link rel="stylesheet" href="/css/highlight.css?v={{ css_version }}">{% endif %}
+  {% if has_math %}<link rel="stylesheet" href="/katex/katex.min.css">{% endif %}
+  <script src="/js/main.js?v={{ js_version }}" defer></script>
+  {% block jsonld %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% block progress %}{% endblock %}
+  {% include "partials/header.html" %}
+  <main id="main" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
+</body>
+</html>

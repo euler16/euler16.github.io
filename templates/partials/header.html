@@ -1,0 +1,38 @@
+{% set nav_items = [
+  ("about", "/about/", "About"),
+  ("security", "/security/", "Security"),
+  ("projects", "/projects/", "Projects"),
+  ("physics", "/physics/", "Physics"),
+  ("writing", "/writing/", "Writing"),
+] %}
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="/" aria-label="{{ site.title }}, home">
+      {{ m.brandmark() }}
+      <span>{{ site.title }}</span>
+    </a>
+    <ul class="nav__links">
+      {% for key, href, label in nav_items %}
+      <li><a href="{{ href }}"{% if nav == key %} aria-current="page"{% endif %}>{{ label }}</a></li>
+      {% endfor %}
+    </ul>
+    <div class="nav__tools">
+      <button class="icon-btn theme-toggle" type="button" aria-label="Switch theme" aria-pressed="false">
+        {{ m.icon("moon", "icon-moon") }}{{ m.icon("sun", "icon-sun") }}
+      </button>
+      <a class="btn btn--ghost btn--small nav__cta" href="/contact/"{% if nav == "contact" %} aria-current="page"{% endif %}>Contact</a>
+      <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+        {{ m.icon("menu") }}
+      </button>
+    </div>
+  </nav>
+</header>
+<div class="mobile-nav" id="mobile-nav">
+  <ul>
+    <li><a href="/"{% if nav == "home" %} aria-current="page"{% endif %}>Home</a></li>
+    {% for key, href, label in nav_items %}
+    <li><a href="{{ href }}"{% if nav == key %} aria-current="page"{% endif %}>{{ label }}</a></li>
+    {% endfor %}
+  </ul>
+  <a class="btn btn--primary" href="/contact/">Get in touch</a>
+</div>

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <h1>Writing</h1>
+    <p class="lede">Notes, worked problems and essays on physics, software and security — written mainly to make sure I understand something.</p>
+  </div>
+</header>
+
+<section class="section" style="padding-top:0" data-writing>
+  <div class="wrap">
+    <div class="toolbar">
+      <label class="search">
+        <span class="visually-hidden">Search articles</span>
+        {{ m.icon("search") }}
+        <input id="post-search" type="search" placeholder="Search articles" autocomplete="off" spellcheck="false">
+      </label>
+      <div class="chips" role="group" aria-label="Filter by category">
+        <button class="chip" type="button" data-category="all" aria-pressed="true">All<span class="count">{{ posts | length }}</span></button>
+        {% for c in categories %}
+        <button class="chip" type="button" data-category="{{ c.slug }}" aria-pressed="false">{{ c.name }}<span class="count">{{ posts | selectattr("category", "equalto", c.slug) | list | length }}</span></button>
+        {% endfor %}
+      </div>
+    </div>
+    <h2 class="visually-hidden">Articles</h2>
+    <p id="post-filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    <ul class="post-list">
+      {% for p in posts %}{{ m.post_row(p) }}{% endfor %}
+    </ul>
+    <div class="empty" data-empty hidden>
+      <p>No articles match that search.</p>
+      <button class="btn btn--ghost btn--small" type="button" data-clear>Clear search and filters</button>
+    </div>
+    <p class="muted" style="margin-top:2rem">Follow new posts with the <a href="/feed.xml">RSS feed</a>.</p>
+  </div>
+</section>
+{% endblock %}

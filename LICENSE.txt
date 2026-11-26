@@ -1,8 +1,7 @@
+Code (build.py, templates/, static/css, static/js, scripts/) — MIT License
 
-
-MIT License
-
-Copyright (c) 2017 Hemang Kumar
+Copyright (c) 2026 Mehedi Ackerman
+Copyright (c) 2017 Hemang Kumar (original "Lagrangian" Jekyll theme this site began from)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -22,3 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+Writing, photographs and other content in content/ and static/img/ are
+© Mehedi Ackerman, all rights reserved, unless stated otherwise.
+
+KaTeX (scripts/vendor/katex.min.js, static/katex/) is © Khan Academy and
+contributors, MIT License — see scripts/vendor/KATEX-LICENSE.

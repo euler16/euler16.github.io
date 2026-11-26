@@ -1,0 +1,100 @@
+{% macro brandmark() -%}
+<svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <rect width="32" height="32" rx="9" fill="currentColor"/>
+  <g stroke="var(--bg)" stroke-width="2" stroke-linecap="round" fill="none"><path d="M16 8 L11 17 L19.5 23"/></g>
+  <circle cx="16" cy="8" r="1.8" fill="var(--bg)"/><circle cx="11" cy="17" r="2.4" fill="var(--bg)"/>
+  <circle cx="19.5" cy="23" r="3" fill="var(--accent)"/>
+</svg>
+{%- endmacro %}
+
+{% macro icon(name, cls="") -%}
+<svg class="{{ cls }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{%- if name == "moon" %}<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>
+{%- elif name == "sun" %}<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+{%- elif name == "menu" %}<path d="M4 8h16M4 16h16"/>
+{%- elif name == "arrow" %}<path d="M5 12h14M13 6l6 6-6 6"/>
+{%- elif name == "arrow-up-right" %}<path d="M7 17 17 7M8 7h9v9"/>
+{%- elif name == "github" %}<path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>
+{%- elif name == "linkedin" %}<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/>
+{%- elif name == "mail" %}<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 6.5 8.5 6 8.5-6"/>
+{%- elif name == "x" %}<path d="M4 4l16 16M20 4 4 20" stroke-width="1.5"/>
+{%- elif name == "search" %}<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+{%- elif name == "shield" %}<path d="M12 3 4.5 6v6c0 4.4 3.2 8 7.5 9 4.3-1 7.5-4.6 7.5-9V6L12 3z"/><path d="m9 12 2 2 4-4"/>
+{%- elif name == "code" %}<path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>
+{%- elif name == "atom" %}<circle cx="12" cy="12" r="1.6"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9.5" ry="3.8" transform="rotate(120 12 12)"/>
+{%- elif name == "badge" %}<circle cx="12" cy="9" r="6"/><path d="m8.5 13.8-1.5 7.2 5-2.5 5 2.5-1.5-7.2"/>
+{%- elif name == "share" %}<path d="M12 3v12M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>
+{%- elif name == "download" %}<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>
+{%- elif name == "android" %}<rect x="5" y="9" width="14" height="10" rx="2"/><path d="M8 9a4 4 0 0 1 8 0M9 5.5 8 4M15 5.5 16 4"/>
+{%- elif name == "puzzle" %}<path d="M10 4a2 2 0 1 1 4 0v2h4v4h-2a2 2 0 1 0 0 4h2v4h-4v-2a2 2 0 1 0-4 0v2H6v-4h2a2 2 0 1 0 0-4H6V6h4z"/>
+{%- elif name == "wave" %}<path d="M3 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0"/>
+{%- elif name == "tool" %}<path d="M14.5 6.5a4 4 0 0 0-5.3 5.3L4 17l3 3 5.2-5.2a4 4 0 0 0 5.3-5.3l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6z"/>
+{%- elif name == "grid" %}<rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/>
+{%- endif %}
+</svg>
+{%- endmacro %}
+
+{% macro project_glyph(p) -%}
+{%- if p.category == "android" %}{{ icon("android") }}
+{%- elif p.kind == "Chrome extension" %}{{ icon("puzzle") }}
+{%- elif p.category == "science" %}{{ icon("wave") }}
+{%- elif p.category == "tools" %}{{ icon("tool") }}
+{%- else %}{{ icon("grid") }}{% endif %}
+{%- endmacro %}
+
+{% macro project_feature(p, flip=false) -%}
+<a class="project-feature{% if flip %} project-feature--flip{% endif %}" href="{{ p.url }}" style="--h: {{ p.hue }}" data-project-category="{{ p.category }}">
+  <div class="project-art">
+    {{ project_art(p.motif) | safe }}
+    <span class="project-art__label">{{ p.kind }}</span>
+  </div>
+  <div class="project-feature__body">
+    <h3>{{ p.name }}</h3>
+    <p>{{ p.summary }}</p>
+    <ul class="tags" aria-label="Technologies">
+      {% for s in p.stack[:5] %}<li class="pill">{{ s }}</li>{% endfor %}
+    </ul>
+    <div class="project-feature__foot">
+      <span class="text-link">Read the case study</span>
+      {% if p.license %}<span class="meta">{{ p.license }} licence</span>{% endif %}
+    </div>
+  </div>
+</a>
+{%- endmacro %}
+
+{% macro project_card(p) -%}
+{% set ext = p.url | is_external %}
+{% if p.placeholder %}
+<div class="project-card project-card--placeholder" style="--h: {{ p.hue }}" data-project-category="{{ p.category }}">
+{% else %}
+<a class="project-card" href="{{ p.url }}" style="--h: {{ p.hue }}" data-project-category="{{ p.category }}"{% if ext %} rel="noopener" target="_blank"{% endif %}>
+{% endif %}
+  <div class="project-card__top">
+    <span class="project-card__glyph">{{ project_glyph(p) }}</span>
+    <div>
+      <h3>{{ p.name }}</h3>
+      <span class="meta">{{ p.kind }}</span>
+    </div>
+  </div>
+  {% if p.placeholder %}
+  <p>Details and repository link coming soon.</p>
+  {% else %}
+  <p>{{ p.summary }}</p>
+  {% if p.stack %}<ul class="tags" aria-label="Technologies">{% for s in p.stack[:4] %}<li class="pill">{{ s }}</li>{% endfor %}</ul>{% endif %}
+  {% if ext %}<span class="visually-hidden">(opens in a new tab)</span>{% endif %}
+  {% endif %}
+{% if p.placeholder %}</div>{% else %}</a>{% endif %}
+{%- endmacro %}
+
+{% macro post_row(p) -%}
+<li class="post-row" data-category="{{ p.category }}" data-url="{{ p.url }}">
+  <a href="{{ p.url }}">
+    <time class="meta" datetime="{{ p.date.isoformat() }}">{{ p.date | date_short }}</time>
+    <div>
+      <h3>{{ p.title }}</h3>
+      {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+    </div>
+    <span class="meta">{{ cat_names[p.category] }}, {{ p.minutes }} min</span>
+  </a>
+</li>
+{%- endmacro %}

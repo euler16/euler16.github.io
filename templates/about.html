@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block jsonld %}
+<script type="application/ld+json">
+{{ {"@context": "https://schema.org", "@type": "ProfilePage", "url": site.url ~ "/about/",
+    "mainEntity": {"@type": "Person", "@id": site.url ~ "/#person", "name": site.author.name}} | tojson }}
+</script>
+{% endblock %}
+{% block content %}
+<header class="page-head">
+  <div class="wrap profile">
+    <div>
+      <h1>Physicist by training. Engineer by habit.</h1>
+      <p class="lede">I'm an undergraduate in physics at Gopalganj Science and Technology University in Bangladesh. Along the way I started building software, and since 2021 I've worked as a cyber security analyst — helping people when that software, or someone using it, is turned against them.</p>
+      <div class="btn-row" style="margin-top:1.5rem">
+        <a class="btn btn--primary" href="/contact/">Contact me</a>
+        {% if site.links.cv %}<a class="btn btn--ghost" href="{{ site.links.cv }}" download>{{ m.icon("download") }}Download CV</a>{% endif %}
+        {% if site.links.linkedin %}<a class="btn btn--ghost" href="{{ site.links.linkedin }}" rel="noopener">{{ m.icon("linkedin") }}LinkedIn</a>{% endif %}
+      </div>
+    </div>
+    <div class="portrait">
+      <picture>
+        <source srcset="/img/me-640.webp 640w, /img/me-320.webp 320w" sizes="260px" type="image/webp">
+        <img src="/img/me-640.jpg" alt="{{ site.author.photo_alt }}" width="640" height="640">
+      </picture>
+    </div>
+  </div>
+</header>
+
+<section class="section" aria-labelledby="intro">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="intro">Introduction</h2></div>
+    <div class="prose">
+      <p>My work sits where three interests overlap. Physics taught me to reduce a problem to the variables that matter and to distrust an answer I can't derive. Software gave me a way to turn ideas into tools other people can use. Security is the discipline that asks what happens when those tools meet someone who wants to misuse them.</p>
+      <p>I keep this site as a record of that work: the apps I build, the physics I'm studying, and notes written to make sure I actually understand something.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="academic">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="academic">Academic background</h2></div>
+    <div>
+      <ol class="timeline">
+        {% for e in site.education %}
+        <li>
+          {% if e.years %}<span class="meta">{{ e.years }}</span>{% endif %}
+          <h3>{{ e.degree }}</h3>
+          <p>{{ e.institution }}, {{ e.location }}</p>
+          {% if e.note %}<p>{{ e.note[:1] | upper }}{{ e.note[1:] }}.</p>{% endif %}
+        </li>
+        {% endfor %}
+      </ol>
+      <div class="prose" style="margin-top:2rem">
+        <p>Coursework and self-study have centred on classical mechanics — particularly the Lagrangian and Hamiltonian formulations — and electromagnetism. The <a href="/writing/">writing section</a> holds some of that work, including a worked problem from Morin and a long look at whether Kirchhoff's voltage law survives a changing magnetic field.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="security">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="security">Cybersecurity</h2><a class="text-link" href="/security/">Security page</a></div>
+    <div class="prose">
+      <p>I'm interested in information security from both sides: understanding how systems are attacked, and designing software so that a compromise costs as little as possible. In practice that means encrypting data at rest, requesting only the permissions an app truly needs, and drawing hard lines around authentication and payment.</p>
+      <p>I'm also interested in security education — explaining risks clearly enough that people change what they do. I've taught data safety to university students through the ActionAid-backed Data Shield project, and in October 2026 I earned the <a href="/security/#certs">Certified Cybersecurity Educator Professional (CCEP)</a> credential from Red Team Leaders.</p>
+      {% for x in site.experience %}
+      <p>Since {{ x.since }} I've worked as a <strong>{{ x.role }}</strong> at {{ x.org }} in {{ x.location.split(",")[0] }}: advising people and businesses on cybercrime, carrying out forensic investigations, and supporting victims and law enforcement through legal complaints and prosecutions. <a href="/security/#experience">More on the security page</a>.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="software">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="software">Software development</h2><a class="text-link" href="/projects/">Projects</a></div>
+    <div class="prose">
+      <p>Most of what I build is for Android, in Kotlin with Jetpack Compose. I favour offline-first designs: apps that keep working without a connection and keep personal data on the device. <a href="/projects/wordsmrt/">WordSmrt</a> and <a href="/projects/smartledger/">SmartLedger</a> are the clearest examples. I also write small browser extensions and tools when something repetitive deserves automating.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="physics">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="physics">Physics &amp; research interests</h2><a class="text-link" href="/physics/">Physics page</a></div>
+    <div class="prose">
+      <p>Beyond coursework, I'm drawn to condensed matter and semiconductor physics, and especially to materials for solar energy conversion such as perovskites. Computational methods — simulation and, increasingly, machine learning applied to materials — are where my physics and programming meet. These are interests I'm working towards, not completed research.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="technical">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="technical">Technical background</h2></div>
+    <div class="skills">
+      {% for g in site.skills %}
+      <div><h3>{{ g.group }}</h3><ul class="tags">{% for s in g["items"] %}<li class="pill">{{ s }}</li>{% endfor %}</ul></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="activities">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="activities">Activities &amp; recognition</h2></div>
+    <div>
+      <ol class="timeline">
+        {% for a in site.activities %}
+        <li>
+          <span class="meta">{{ a.date }}</span>
+          <h3>{{ a.title }}</h3>
+          <p>{{ a.org }}. {{ a.detail }}</p>
+        </li>
+        {% endfor %}
+      </ol>
+      {% if site.elsewhere %}
+      <div class="prose" style="margin-top:2rem">
+        {% for e in site.elsewhere %}<p>Outside science and code, I write <a href="{{ e.url }}" rel="noopener">{{ e.name }}</a> — {{ e.summary[0] | lower }}{{ e.summary[1:] }}</p>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="goals">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="goals">What I'm working towards</h2></div>
+    <div class="prose">
+      <ul>
+        <li>Growing from cybercrime response into secure software development and security research, where engineering decisions are made with an attacker in mind.</li>
+        <li>Graduate study or research collaboration in condensed matter, semiconductor or computational physics.</li>
+        <li>Publishing more of what I learn — security explainers as well as physics notes — and contributing to open-source software.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block jsonld %}
+{% set creds = [] %}
+{% for c in site.certifications if c.verify_url %}{% set _ = creds.append({"@type": "EducationalOccupationalCredential", "name": c.name, "credentialCategory": "certificate", "url": c.verify_url, "recognizedBy": {"@type": "Organization", "name": c.issuer}}) %}{% endfor %}
+{% if creds %}
+<script type="application/ld+json">
+{{ {"@context": "https://schema.org", "@type": "Person", "@id": site.url ~ "/#person", "name": site.author.name, "hasCredential": creds} | tojson }}
+</script>
+{% endif %}
+{% endblock %}
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <h1>Security is a design decision, not a feature.</h1>
+    <p class="lede">Since 2021 I've worked as a cyber security analyst, helping victims of cybercrime and the people investigating it. I bring the same thinking to the software I build: encrypt what is stored, collect only what is needed, and keep people in control of every sensitive step.</p>
+  </div>
+</header>
+
+<section class="section" aria-labelledby="focus">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="focus">Areas of focus</h2><p>What I spend my security time on.</p></div>
+    <div class="def-grid">
+      <div class="item"><h3>Information security</h3><p>Confidentiality, integrity and availability in practice: data-at-rest encryption, key management, authentication and least privilege.</p></div>
+      <div class="item"><h3>Cybercrime response &amp; forensics</h3><p>Investigating incidents, identifying the people behind them, and helping victims through legal complaints.</p></div>
+      <div class="item"><h3>Education &amp; awareness</h3><p>Teaching data safety clearly, without jargon or fear: phishing, passwords, account recovery and the everyday risks behind most compromises.</p></div>
+      <div class="item"><h3>Security research</h3><p>Studying how vulnerabilities arise in web and mobile applications, and how they are found and responsibly disclosed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="experience">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="experience">Experience</h2></div>
+    <div style="display:grid;gap:1rem">
+      {% for x in site.experience %}
+      <article class="panel">
+        <span class="meta">{{ x.since }} – present, {{ x.location }}</span>
+        <h3 style="margin-top:.5rem">{{ x.role }}, {{ x.org }}</h3>
+        <ul class="prose" style="margin-top:1rem;font-size:1rem">
+          {% for pt in x.points %}<li>{{ pt }}</li>{% endfor %}
+        </ul>
+      </article>
+      {% endfor %}
+      {% for e in site.security_education %}
+      <a class="panel evidence-link" href="{{ e.url }}" rel="noopener" style="color:var(--ink);display:block">
+        <span class="meta">Security education, {{ e.org }}</span>
+        <h3 style="margin-top:.5rem">{{ e.name }}</h3>
+        <p class="muted" style="margin:.4rem 0 0">{{ e.summary }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="certs">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="certs">Certifications</h2></div>
+    <div class="list-plain" style="display:grid;gap:1rem">
+      {% for c in site.certifications %}
+      <article class="panel cert">
+        <span class="cert__seal">{{ m.icon("badge") }}</span>
+        <div>
+          <h3>{{ c.name }}</h3>
+          {% if c.issuer or c.date or c.credential_id %}
+          <dl>
+            {% if c.issuer %}<div><dt>Issuer</dt><dd>{{ c.issuer }}</dd></div>{% endif %}
+            {% if c.date %}<div><dt>Issued</dt><dd>{{ c.date }}</dd></div>{% endif %}
+            {% if c.credential_id %}<div><dt>Credential ID</dt><dd>{{ c.credential_id }}</dd></div>{% endif %}
+          </dl>
+          {% endif %}
+          {% if c.verify_url %}<p style="margin:.9rem 0 0"><a class="text-link" href="{{ c.verify_url }}" rel="noopener">Verify credential</a></p>{% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="practice">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="practice">Security in my own projects</h2><p>Concrete decisions from code I have shipped.</p></div>
+    <div class="evidence">
+      <a href="/projects/smartledger/">
+        <h3>SmartLedger: encryption at rest</h3>
+        <p>The business database is encrypted with SQLCipher, keys are held by the Android Keystore, the app locks behind a PIN or biometrics, and Google Drive backups are encrypted before upload.</p>
+      </a>
+      <a href="/projects/wordsmrt/">
+        <h3>WordSmrt: nothing to leak</h3>
+        <p>No permissions, no accounts, no servers. Data minimisation as architecture: what never leaves the device cannot be intercepted or breached.</p>
+      </a>
+      <a href="/projects/bd-railway-helper/">
+        <h3>BD Railway Helper: hard boundaries</h3>
+        <p>The automation never touches login, CAPTCHA, OTP or payment. Every security-sensitive step stays with the user, and the extension stores no secrets.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="writeups">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="writeups">Write-ups</h2><p>Security tips, vulnerability explainers and research notes.</p></div>
+    <div>
+      {% if posts %}
+      <ul class="post-list">{% for p in posts %}{{ m.post_row(p) }}{% endfor %}</ul>
+      {% else %}
+      <div class="panel">
+        <p style="margin:0">Security write-ups will be published here. Meanwhile, the <a href="/writing/">writing section</a> has notes on physics and software, and the <a href="/feed.xml">RSS feed</a> will announce new posts.</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

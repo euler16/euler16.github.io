@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="page-head">
+  <div class="wrap">
+    <h1>Things I've built.</h1>
+    <p class="lede">Android apps, browser extensions and small scientific tools. Each one started with a specific problem; the case studies explain the decisions behind them.</p>
+  </div>
+</header>
+
+<section class="section" style="padding-top:0" aria-labelledby="featured">
+  <div class="wrap">
+    <h2 id="featured" class="visually-hidden">Featured projects</h2>
+    <div class="project-stack">
+      {% for p in projects if p.featured %}
+      {{ m.project_feature(p, flip=loop.index is even) }}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="all">
+  <div class="wrap">
+    <div class="toolbar" style="grid-template-columns:1fr auto">
+      <h2 id="all">All projects</h2>
+      <div class="chips" role="group" aria-label="Filter projects by type" data-project-filters>
+        {% for f in site.project_filters %}
+        <button class="chip" type="button" data-filter="{{ f.slug }}" aria-pressed="{{ 'true' if f.slug == 'all' else 'false' }}">{{ f.name }}</button>
+        {% endfor %}
+      </div>
+    </div>
+    <p id="project-filter-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    <div class="project-grid">
+      {% for p in projects %}{{ m.project_card(p) }}{% endfor %}
+    </div>
+    <p class="muted" style="margin-top:2rem">More repositories on <a href="{{ site.links.github }}" rel="noopener">GitHub</a>.</p>
+  </div>
+</section>
+{% endblock %}
